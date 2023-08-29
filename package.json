@@ -1,0 +1,40 @@
+{
+    "name": "insomnia-plugin-recolor",
+    "version": "0.1.0",
+    "author": "k3rielit",
+    "private": true,
+    "insomnia": {
+        "name": "recolor",
+        "displayName": "Recolor",
+        "description": "A simple Insomnia plugin to bring back the old colorful HTTP method indicators."
+    },
+    "main": "./src/main.js",
+    "exports": {
+        ".": "./src/main.js"
+    },
+    "files": [
+        "./src/**"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "publish": "cd src && npm publish",
+        "publish-dry": "cd src && npm publish --dry-run",
+        "install": "copyfiles -u 1 ./src/* %appdata%/insomnia/plugins/insomnia-plugin-recolor",
+        "install-dev": "copyfiles -u 1 ./src/* %appdata%/insomnia-app/plugins/insomnia-plugin-recolor"
+    },
+    "description": "A simple Insomnia plugin to bring back the old colorful HTTP method indicators.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/k3rielit/insomnia-plugin-recolor.git"
+    },
+    "homepage": "https://github.com/k3rielit/insomnia-plugin-recolor#readme",
+    "bugs": {
+        "url": "https://github.com/k3rielit/insomnia-plugin-recolor/issues"
+    },
+    "keywords": [
+        "insomnia",
+        "insomnia-plugin",
+        "recolor"
+    ],
+    "license": "ISC"
+}
