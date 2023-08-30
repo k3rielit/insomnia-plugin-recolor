@@ -13,7 +13,7 @@ cd insomnia-plugin-recolor
 
 ### Windows
 
-Run `install.bat`, or manually copy the contents of `./src/` to `%appdata%/Insomnia/plugins/insomnia-plugin-recolor`
+Run `install.bat`, or manually copy the `main.js` and `package.json` files to `%appdata%/Insomnia/plugins/insomnia-plugin-recolor`.
 
 ### npm
 
