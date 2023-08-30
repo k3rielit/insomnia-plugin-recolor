@@ -25,15 +25,37 @@ const recolor = {
     classlists: {
         coloredHttpMethod: 'w-10 flex-shrink-0 flex items-center'
     },
+    observerSettings: {
+        base: { childList: true, subtree: true },
+        span: { childList: true, characterData: true, subtree: true }
+    },
+    // Not implemented yet
+    settings: {
+        recolor: true,
+        longtext: false
+    }
 }
 
+function recolorNode(node) {
+    // Recolor the node based on the new text content
+    if(!node.setAttribute) return;
+    let httpMethod = node.textContent;
+    node.setAttribute('style', `font-weight: bold; font-size: 0.85rem; color: ${recolor.colormap[httpMethod] ? recolor.colormap[httpMethod] : recolor.colormap.default};`);
+}
 
-const observer = new MutationObserver((mutationList, observer) => {
-    // Search for bordered nodes
-    document.querySelectorAll(recolor.selectors.httpMethod).forEach(node => {
-        let httpMethod = node.innerText;
-        node.setAttribute('class',recolor.classlists.coloredHttpMethod);
-        node.setAttribute('style',`font-weight: bold; font-size: 0.85rem; color: ${recolor.colormap[httpMethod] ? recolor.colormap[httpMethod] : recolor.colormap.default};`);
+const spanObserver = new MutationObserver((mutationList) => {
+    // look for text node with the characterData mutation type, then recolor its parent node (span)
+    mutationList.forEach(mutation => {
+        if(mutation && mutation.type == 'characterData') recolorNode(mutation.target.parentNode);
     });
 });
-observer.observe(document.body, {attributes: true, childList: true, subtree: true});
+
+const baseObserver = new MutationObserver((mutationList) => {
+    // Search for new nodes, modify their classlist, then observe their text content changes
+    document.querySelectorAll(recolor.selectors.httpMethod).forEach(node => {
+        node.setAttribute('class', recolor.classlists.coloredHttpMethod);
+        recolorNode(node);
+        spanObserver.observe(node, recolor.observerSettings.span);
+    });
+});
+baseObserver.observe(document.body, recolor.observerSettings.base);

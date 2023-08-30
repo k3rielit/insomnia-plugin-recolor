@@ -2,8 +2,6 @@
 
 A simple Insomnia plugin to bring back the old colorful HTTP method indicators in the sidebar.
 
-Uses a `MutationObserver` to look for bordered elements in the requests list, then modifies its class and style. As of now, it doesn't update the colors when a request's http method is changed. Removing the .body from the selector would solve it, but then Insomnia won't load, due to the constant DOM updates and the infinite qureySelectorAll calls. Changing the document.body for the sidebar in the observer won't fix it, and will create another problem (waiting for that node to be in the DOM).
-
 ## How to use
 
 ### Clone the repository
@@ -24,6 +22,13 @@ npm install copyfiles -g
 npm run install
 ```
 
+## Changelog
+
+### Version 1.0.0 `2023.08.30.`
+
+- First stable release
+
 ## Todo
 
-- Replace MutationObserver with something else
+- Use an Insomnia hook to edit `recolor.settings`
+- Use `recolor.settings` to control the plugin
