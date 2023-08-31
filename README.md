@@ -29,7 +29,7 @@ cd insomnia-plugin-recolor
 
 ## Changelog
 
-### Version 1.0.1 hotfix `2023.08.31.`
+### Version 1.0.2 hotfix `2023.08.31.`
 
 - Fixed the install error
 
